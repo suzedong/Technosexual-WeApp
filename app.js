@@ -99,17 +99,31 @@ App({
     async function loginByOpenid(code) {
       const res = await awx.request({ url: that.globalData.globalUrl + '/weapp/login?code=' + code })
         .catch((error) => {
-          console.log(error)
+          // 网络级错误
+          console.log('Error:', error)
           wx.showToast({
             title: '登录错误:' + error.errMsg,
             icon: 'none',
             duration: 2000
           })
         })
+        
+      console.log('loginByOpenid - res:', res)
+      
       if (!res) return { session_key: null }
+      
+      // 业务级错误
+      if (res.data.errmsg) {
+        wx.showToast({
+          title: '登录错误:' + res.data.errmsg,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+
       console.log('loginByOpenid - res.data:', res.data)
-      that.globalData.person = res.data.person
-      return res.data.person
+      that.globalData.person = res.data
+      return res.data
     }
 
     async function getUserInfo(encryptedData, iv, session_key) {

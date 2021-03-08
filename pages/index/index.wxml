@@ -2,7 +2,7 @@
 <van-notify id="van-notify" />
 <view class="container">
   <view class="userinfo">
-    <van-button type="primary" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </van-button>
+    <van-button type="primary" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </van-button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
@@ -11,7 +11,9 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+<!-- 
   <view>
     <van-button type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机绑定</van-button>
-  </view>
+  </view> 
+-->
 </view>

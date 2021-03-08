@@ -1,2 +1,43 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<van-notify id="van-notify" />
+<van-card
+  desc="{{ person.person.name }}"
+  title="{{ userInfo.nickName }}"
+  thumb="{{ userInfo.avatarUrl }}"
+>
+  <view slot="num">
+    {{ userInfo.gender==1?'男':'女' }}
+  </view>
+  <view slot="price">
+    {{ userInfo.openId }}
+  </view>
+  <view slot="price-top">
+    {{ userInfo.province }}
+  </view>
+  <view slot="tags">
+    {{ userInfo.city }}
+  </view>
+  <view slot="footer">
+    <van-button size="mini" bind:click="openFamilyCreate">建立新家庭</van-button>
+    <van-button size="mini">按钮</van-button>
+  </view>
+ </van-card> 
+
+ <van-dialog
+  use-slot
+  title="建立新家庭"
+  show="{{ show }}"
+  show-cancel-button
+  bind:close="onClose"
+  bind:confirm="okFamilyCreate"
+>
+<van-cell-group>
+  <van-field
+    model:value="{{ value }}"
+    placeholder="请输入用户名"
+    border="{{ false }}"
+    required
+    error-message="{{ value!=''?'':'不能为空！' }}"
+  />
+</van-cell-group>
+</van-dialog>

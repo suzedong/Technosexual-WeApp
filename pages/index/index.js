@@ -6,7 +6,7 @@ const awx = wx.async('login', 'request')
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: '登录即可完成注册！',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -41,9 +41,9 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         }),
-        wx.reLaunch({
-          url: '../home/home'
-        })
+          wx.reLaunch({
+            url: '../home/home'
+          })
 
         // (async () => {
         //   const res = await awx.request({ url: app.globalData.globalUrl + '/health' })
@@ -73,12 +73,14 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    if (!session_key) { return }
-    
+
     let that = app
     const encryptedData = e.detail.encryptedData
     const iv = e.detail.iv
     const session_key = that.globalData.person.session_key
+
+    if (!session_key) { return }
+
     // console.log(encryptedData, iv, session_key)
     // 解密&后台保存
     await getUserInfo(encryptedData, iv, session_key)
